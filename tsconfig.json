@@ -3,7 +3,7 @@
     "target": "ES6",
     "module": "CommonJS",
     "lib": [
-      "es6",
+      "es2019",
       "DOM"
     ],
     "declaration": true,
