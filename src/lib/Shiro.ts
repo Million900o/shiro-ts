@@ -1,12 +1,33 @@
+// This is still very bad, im not sure how this should be done.
+
 import fetch from 'node-fetch';
 
-const mainUrl = 'https://shiro.gg/api/'
+const mainURL = 'https://shiro.gg/api/'
 
-type SFWImageType = 'avatars' | 'blush' | 'hug' | 'kiss' | 'neko' | 'nom' | 'pat' | 'pout' | 'slap' | 'smug' | 'wallpapers'
-type NSFWImageType = 'bondage' | 'hentai' | 'thighs'
+enum SFWImageType {
+  avatars = 'avatar',
+  blush = 'blush',
+  hug = 'hug',
+  kiss = 'kiss',
+  neko = 'neko',
+  nom = 'nom',
+  pat = 'pat',
+  pout = 'pout',
+  slap = 'slap',
+  smug = 'smug',
+  wallpapers = 'wallpapers',
+}
+
+enum NSFWImageType {
+  bondage = 'bondage',
+  hentai = 'hentai',
+  thighs = 'thighs'
+}
+
+type ValidEndpoints = SFWImageType | NSFWImageType
 
 interface response {
-  status: 200 | 204 | 404 | 403 | 429;
+  code: 200 | 204 | 404 | 403 | 429;
   url?: string;
   message?: string;
 }
@@ -14,28 +35,38 @@ interface response {
 class Shiro {
   constructor() { }
 
-  static async sfw(type: SFWImageType, amount: number): Promise<response | response[]> {
-    const promises = [];
-    if (!amount || amount === 1) {
-      return await fetch(mainUrl + 'images/' + type).then(e => e.json())
-    } else if (amount < 11) {
-      for (let i = 0; i < amount; i++) {
-        promises.push(fetch(mainUrl + 'images/' + type).then(e => e.json()))
-      }
-      return await Promise.all(promises);
-    } else throw new Error('amount exceded maximum (10)')
+  static async sfw(type: SFWImageType, options: object): Promise<response | response[]> {
+    this.validateSFWEndpoint(type)
+    return await this.request('images/' + type + this.parseOptions(options)) as response
   }
 
-  static async nsfw(type: NSFWImageType, amount: number): Promise<response | response[]> {
-    const promises = [];
-    if (!amount || amount === 1) {
-      return await fetch(mainUrl + 'images/nsfw/' + type).then(e => e.json())
-    } else if (amount < 11) {
-      for (let i = 0; i < amount; i++) {
-        promises.push(fetch(mainUrl + 'images/nsfw/' + type).then(e => e.json()))
-      }
-      return await Promise.all(promises);
-    } else throw new Error('amount exceded maximum (10)')
+  static async nsfw(type: NSFWImageType, options: object): Promise<response | response[]> {
+    this.validateNSFWEndpoints(type)
+    return await this.request('images/nsfw/' + type + this.parseOptions(options))
+  }
+
+  private static validateSFWEndpoint(endpoint: ValidEndpoints): boolean {
+    if (!SFWImageType[endpoint]) throw new Error('SFW endpoint ' + endpoint + 'does not exist')
+    return true;
+  }
+
+  private static validateNSFWEndpoints(endpoint: ValidEndpoints): boolean {
+    if (!NSFWImageType[endpoint]) throw new Error('NSFW endpoint ' + endpoint + 'does not exist')
+    return true;
+  }
+
+  private static parseOptions(options: object): string {
+    if (!options || typeof (options) !== 'object') return '';
+    let str = '';
+    for (const [key, value] of Object.entries(options)) {
+      if (!str) str += `?${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+      str += `&${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+    }
+    return str;
+  }
+
+  private static async request(endpoint: string): Promise<any> {
+    return await fetch(mainURL + endpoint).then(req => req.json())
   }
 }
 
