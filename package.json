@@ -1,0 +1,25 @@
+{
+  "name": "shiro-ts",
+  "version": "0.0.1",
+  "description": "idk",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Million900o/shiro-ts.git"
+  },
+  "author": "MILLION",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Million900o/shiro-ts/issues"
+  },
+  "homepage": "https://github.com/Million900o/shiro-ts#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.5.7"
+  }
+}
