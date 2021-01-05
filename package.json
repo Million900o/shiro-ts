@@ -1,6 +1,6 @@
 {
   "name": "shiro-ts",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "idk",
   "main": "dist/index.js",
   "scripts": {

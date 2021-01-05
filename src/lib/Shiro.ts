@@ -46,12 +46,12 @@ class Shiro {
   }
 
   private static validateSFWEndpoint(endpoint: ValidEndpoints): boolean {
-    if (!SFWImageType[endpoint]) throw new Error('SFW endpoint ' + endpoint + 'does not exist')
+    if (!SFWImageType[endpoint]) throw new Error('SFW endpoint ' + endpoint + ' does not exist')
     return true;
   }
 
   private static validateNSFWEndpoints(endpoint: ValidEndpoints): boolean {
-    if (!NSFWImageType[endpoint]) throw new Error('NSFW endpoint ' + endpoint + 'does not exist')
+    if (!NSFWImageType[endpoint]) throw new Error('NSFW endpoint ' + endpoint + ' does not exist')
     return true;
   }
 
