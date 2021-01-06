@@ -4,26 +4,28 @@ import fetch from 'node-fetch';
 
 const mainURL = 'https://shiro.gg/api/'
 
-enum SFWImageType {
-  avatars = 'avatar',
-  blush = 'blush',
-  hug = 'hug',
-  kiss = 'kiss',
-  neko = 'neko',
-  nom = 'nom',
-  pat = 'pat',
-  pout = 'pout',
-  slap = 'slap',
-  smug = 'smug',
-  wallpapers = 'wallpapers',
+const SFWImages = {
+  avatars: 'avatar',
+  blush: 'blush',
+  hug: 'hug',
+  kiss: 'kiss',
+  neko: 'neko',
+  nom: 'nom',
+  pat: 'pat',
+  pout: 'pout',
+  slap: 'slap',
+  smug: 'smug',
+  wallpapers: 'wallpapers',
 }
 
-enum NSFWImageType {
-  bondage = 'bondage',
-  hentai = 'hentai',
-  thighs = 'thighs'
+const NSFWImages = {
+  bondage: 'bondage',
+  hentai: 'hentai',
+  thighs: 'thighs'
 }
 
+type SFWImageType = 'avatar' | 'blush' | 'hug' | 'kiss' | 'neko' | 'nom' | 'pat' | 'pout' | 'slap' | 'smug' | 'wallpapers'
+type NSFWImageType = 'bondage' | 'hentai' | 'thighs'
 type ValidEndpoints = SFWImageType | NSFWImageType
 
 interface response {
@@ -46,12 +48,12 @@ class Shiro {
   }
 
   private static validateSFWEndpoint(endpoint: ValidEndpoints): boolean {
-    if (!SFWImageType[endpoint]) throw new Error('SFW endpoint ' + endpoint + ' does not exist')
+    if (!SFWImages[endpoint]) throw new Error('SFW endpoint ' + endpoint + ' does not exist')
     return true;
   }
 
   private static validateNSFWEndpoints(endpoint: ValidEndpoints): boolean {
-    if (!NSFWImageType[endpoint]) throw new Error('NSFW endpoint ' + endpoint + ' does not exist')
+    if (!NSFWImages[endpoint]) throw new Error('NSFW endpoint ' + endpoint + ' does not exist')
     return true;
   }
 

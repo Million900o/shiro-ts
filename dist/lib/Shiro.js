@@ -1,4 +1,5 @@
 "use strict";
+// This is still very bad, im not sure how this should be done.
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -14,26 +15,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_fetch_1 = __importDefault(require("node-fetch"));
 const mainURL = 'https://shiro.gg/api/';
-var SFWImageType;
-(function (SFWImageType) {
-    SFWImageType["avatars"] = "avatar";
-    SFWImageType["blush"] = "blush";
-    SFWImageType["hug"] = "hug";
-    SFWImageType["kiss"] = "kiss";
-    SFWImageType["neko"] = "neko";
-    SFWImageType["nom"] = "nom";
-    SFWImageType["pat"] = "pat";
-    SFWImageType["pout"] = "pout";
-    SFWImageType["slap"] = "slap";
-    SFWImageType["smug"] = "smug";
-    SFWImageType["wallpapers"] = "wallpapers";
-})(SFWImageType || (SFWImageType = {}));
-var NSFWImageType;
-(function (NSFWImageType) {
-    NSFWImageType["bondage"] = "bondage";
-    NSFWImageType["hentai"] = "hentai";
-    NSFWImageType["thighs"] = "thighs";
-})(NSFWImageType || (NSFWImageType = {}));
+const SFWImages = {
+    avatars: 'avatar',
+    blush: 'blush',
+    hug: 'hug',
+    kiss: 'kiss',
+    neko: 'neko',
+    nom: 'nom',
+    pat: 'pat',
+    pout: 'pout',
+    slap: 'slap',
+    smug: 'smug',
+    wallpapers: 'wallpapers',
+};
+const NSFWImages = {
+    bondage: 'bondage',
+    hentai: 'hentai',
+    thighs: 'thighs'
+};
+exports.default = NSFWImages;
 class Shiro {
     constructor() { }
     static sfw(type, options) {
@@ -49,13 +49,13 @@ class Shiro {
         });
     }
     static validateSFWEndpoint(endpoint) {
-        if (!SFWImageType[endpoint])
-            throw new Error('SFW endpoint ' + endpoint + 'does not exist');
+        if (!SFWImages[endpoint])
+            throw new Error('SFW endpoint ' + endpoint + ' does not exist');
         return true;
     }
     static validateNSFWEndpoints(endpoint) {
-        if (!NSFWImageType[endpoint])
-            throw new Error('NSFW endpoint ' + endpoint + 'does not exist');
+        if (!NSFWImages[endpoint])
+            throw new Error('NSFW endpoint ' + endpoint + ' does not exist');
         return true;
     }
     static parseOptions(options) {
@@ -75,4 +75,4 @@ class Shiro {
         });
     }
 }
-exports.default = Shiro;
+// export default Shiro;
