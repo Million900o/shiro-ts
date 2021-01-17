@@ -8,13 +8,16 @@ const SFWImages = {
   avatars: 'avatar',
   blush: 'blush',
   hug: 'hug',
+  cry: 'cry',
   kiss: 'kiss',
   neko: 'neko',
   nom: 'nom',
   pat: 'pat',
+  poke: 'poke',
   pout: 'pout',
   slap: 'slap',
   smug: 'smug',
+  tickle: 'tickle',
   wallpapers: 'wallpapers',
 }
 
@@ -24,7 +27,7 @@ const NSFWImages = {
   thighs: 'thighs'
 }
 
-type SFWImageType = 'avatar' | 'blush' | 'hug' | 'kiss' | 'neko' | 'nom' | 'pat' | 'pout' | 'slap' | 'smug' | 'wallpapers'
+type SFWImageType = 'avatar' | 'blush' | 'hug' | 'cry' | 'kiss' | 'neko' | 'nom' | 'pat' | 'poke' | 'pout' | 'slap' | 'smug' | 'tickle' | 'wallpapers'
 type NSFWImageType = 'bondage' | 'hentai' | 'thighs'
 type ValidEndpoints = SFWImageType | NSFWImageType
 
