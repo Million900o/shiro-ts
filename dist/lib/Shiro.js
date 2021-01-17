@@ -19,13 +19,16 @@ const SFWImages = {
     avatars: 'avatar',
     blush: 'blush',
     hug: 'hug',
+    cry: 'cry',
     kiss: 'kiss',
     neko: 'neko',
     nom: 'nom',
     pat: 'pat',
+    poke: 'poke',
     pout: 'pout',
     slap: 'slap',
     smug: 'smug',
+    tickle: 'tickle',
     wallpapers: 'wallpapers',
 };
 const NSFWImages = {
@@ -33,7 +36,6 @@ const NSFWImages = {
     hentai: 'hentai',
     thighs: 'thighs'
 };
-exports.default = NSFWImages;
 class Shiro {
     constructor() { }
     static sfw(type, options) {
@@ -75,4 +77,4 @@ class Shiro {
         });
     }
 }
-// export default Shiro;
+exports.default = Shiro;
